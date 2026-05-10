@@ -16,20 +16,29 @@ body {
 .container {
   width: 100%;
   max-width: 600px;
-  background: #fff;
+  background: linear-gradient(-45deg, #001b48, #02457a, #018abe, #97cadb);
+  background-size: 400% 400%;
+  animation: ocean-bg-wave 12s ease infinite;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Header with Wave */
+@keyframes ocean-bg-wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header */
 .header {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  background: transparent;
   color: white;
   position: relative;
   padding-top: 25px;
+  padding-bottom: 20px;
 }
 
 .header-content {
@@ -66,15 +75,22 @@ h1 {
 }
 
 .wave {
-  width: 100%;
+  width: 120%;
+  margin-left: -10%; /* Hide edges to allow horizontal movement */
   line-height: 0;
   margin-top: -10px;
+  animation: wave-pendulum 4s ease-in-out alternate infinite;
 }
 
 .wave svg {
   display: block;
   width: 100%;
   height: auto;
+}
+
+@keyframes wave-pendulum {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(8%); }
 }
 
 /* Chat Layout */
@@ -90,10 +106,11 @@ h1 {
   min-height: 300px;
   max-height: 600px;
   overflow-y: auto;
-  padding: 10px 5px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 0px; /* Removed margin to merge seamlessly */
+  background: transparent;
 }
 
 /* Custom Scrollbar */
@@ -196,10 +213,13 @@ input[type="text"] {
   font-family: inherit;
   transition: all 0.3s ease;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  caret-color: #0dcaf0; /* Interesting insertion point color */
 }
 
 input[type="text"]:hover {
-  background-color: #e2e8f0;
+  background: linear-gradient(270deg, #e0f2fe, #ffffff, #e0f2fe);
+  background-size: 200% 200%;
+  animation: bg-wave 2s ease infinite;
 }
 
 input[type="text"]:focus {
@@ -237,12 +257,17 @@ button svg {
   width: 20px;
   height: 20px;
   transform: translateX(-1px);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 button:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 6px 15px rgba(42, 82, 152, 0.4);
   animation: bg-wave 2s ease infinite;
+}
+
+button:hover svg {
+  transform: translateX(2px) scale(1.25);
 }
 
 button:active {
